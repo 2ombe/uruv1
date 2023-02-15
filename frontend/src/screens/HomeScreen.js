@@ -77,7 +77,7 @@ function HomeScreen() {
   return (
     <div>
       <Helmet>
-        <title>jullien</title>
+        <title>Uruvu</title>
       </Helmet>
 
       <Row style={{ left: "0" }}>

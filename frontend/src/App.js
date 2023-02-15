@@ -91,7 +91,7 @@ function App() {
               <LinkContainer to="/">
                 <Navbar.Brand>
                   <img
-                    src="/images/logo.png"
+                    src="/images/capture.png"
                     width={40}
                     height={40}
                     style={{ borderRadius: "50%" }}
