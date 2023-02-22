@@ -18,17 +18,17 @@ productRouter.post(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      name: "Indangamuntu" + Date.now(),
-      slug: "Add id number" + Date.now(),
-      image: "Add photo",
+      name: "sample name " + Date.now(),
+      slug: "add slug" + Date.now(),
+      image: "/images/logo.png",
       price: 0,
-      category: "Id",
-      brand: "Rwanda",
+      category: "sample category",
+      brand: "sample brand",
 
       countInStock: 0,
       rating: 0,
       numReviews: 0,
-      description: "found in street",
+      description: "sample description",
     });
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
@@ -47,7 +47,6 @@ productRouter.put(
       product.name = req.body.name;
       product.slug = req.body.slug;
       product.price = req.body.price;
-      product.costPrice = req.body.costPrice;
       product.image = req.body.image;
       product.category = req.body.category;
       product.brand = req.body.brand;
@@ -66,7 +65,6 @@ productRouter.patch(
 
   expressAsyncHandler(async (req, res) => {
     const {
-      body: { countInStock },
       params: { id: productId },
     } = req;
     const product = await Product.findByIdAndUpdate(
@@ -131,7 +129,7 @@ productRouter.get(
     const pageSize = query.pageSize || PAGE_SIZE;
     const page = query.page || 1;
     const category = query.category || "";
-    const costPrice = query.costPrice || "";
+
     const price = query.price || "";
     const rating = query.rating || "";
     const order = query.order || "";
@@ -191,7 +189,7 @@ productRouter.get(
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
-      ...costPriceFilter,
+
       ...priceFilter,
       ...ratingFilter,
     })
@@ -202,7 +200,7 @@ productRouter.get(
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
-      ...costPriceFilter,
+
       ...priceFilter,
       ...ratingFilter,
     });

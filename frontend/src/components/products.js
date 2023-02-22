@@ -96,7 +96,7 @@ function Product(props) {
   return (
     <>
       <Card>
-        {product.countInStock < 5 && product.countInStock > 0
+        {product.countInStock < 1 && product.countInStock > 0
           ? toast.error(
               `${product.name} is getting out of stock, remain ${product.countInStock}`
             )

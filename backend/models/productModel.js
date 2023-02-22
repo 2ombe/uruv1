@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      default: "./no-image.png",
     },
     brand: {
       type: String,
@@ -27,6 +28,7 @@ const productSchema = new mongoose.Schema(
 
     countInStock: {
       type: Number,
+      default: 1,
     },
 
     rating: {

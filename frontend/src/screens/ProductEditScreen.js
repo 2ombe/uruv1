@@ -47,19 +47,16 @@ export default function ProductEditScreen() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const [
-    { loading, error, loadingUpdate, loadingUpload },
-    dispatch,
-  ] = useReducer(reducer, {
-    loading: true,
-    error: "",
-  });
+  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      error: "",
+    });
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [costPrice, setCostPrice] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
@@ -73,7 +70,7 @@ export default function ProductEditScreen() {
         setName(data.name);
         setSlug(data.slug);
         setPrice(data.price);
-        setCostPrice(data.costPrice);
+
         setImage(data.image);
         setCategory(data.category);
         setCountInStock(data.countInStock);
@@ -92,34 +89,33 @@ export default function ProductEditScreen() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    dispatch({ type: "UPDATE_REQUEST" });
+    await axios.put(
+      `/api/products/${productId}`,
+      {
+        _id: productId,
+        name,
+        slug,
+        price,
+        image,
+        category,
+        brand,
+        countInStock,
+        description,
+      },
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }
+    );
+    dispatch({
+      type: "UPDATE_SUCCESS",
+    });
+    toast.success("Product updated successfully");
+    navigate("/");
     try {
-      dispatch({ type: "UPDATE_REQUEST" });
-      await axios.put(
-        `/api/products/${productId}`,
-        {
-          _id: productId,
-          name,
-          slug,
-          price,
-          costPrice,
-          image,
-          category,
-          brand,
-          countInStock,
-          description,
-        },
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({
-        type: "UPDATE_SUCCESS",
-      });
-      toast.success("Product updated successfully");
-      navigate("/");
     } catch (err) {
       toast.error(getError(err));
-      dispatch({ type: "UPDATE_FAIL" });
+      dispatch({ type: "UPDATE_FAIL", payload: getError(err) });
     }
   };
 
@@ -174,14 +170,7 @@ export default function ProductEditScreen() {
               required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Cost</Form.Label>
-            <Form.Control
-              value={costPrice}
-              onChange={(e) => setCostPrice(e.target.value)}
-              required
-            />
-          </Form.Group>
+
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Price</Form.Label>
             <Form.Control

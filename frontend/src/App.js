@@ -37,6 +37,7 @@ import UserEditScreen from "./screens/UserEditScreen";
 
 import Iyandikishe from "./screens/Irandikishe";
 import ProductListScreen from "./screens/productListScreen copy";
+import Landing from "./screens/Landing";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -270,7 +271,8 @@ function App() {
                   </AdminRoute>
                 }
               />
-              <Route path="/" element={<HomeScreen />} />
+              <Route path="/getdeal" element={<HomeScreen />} />
+              <Route path="/" element={<Landing />} />
             </Routes>
           </Container>
         </main>
