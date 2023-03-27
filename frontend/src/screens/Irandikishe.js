@@ -43,10 +43,10 @@ export default function Iyandikishe() {
       <Helmet>
         <title>Sign In</title>
       </Helmet>
-      <h1 className="my-3">Sign In</h1>
+      <h1 className="my-3">Iyandikishe</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Emeli</Form.Label>
           <Form.Control
             type="email"
             required
@@ -54,7 +54,7 @@ export default function Iyandikishe() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Ijambo banga</Form.Label>
           <Form.Control
             type="password"
             required
@@ -62,14 +62,13 @@ export default function Iyandikishe() {
           />
         </Form.Group>
         <div className="mb-3">
-          <Button type="submit">Sign In</Button>
+          <Button type="submit">Injira</Button>
         </div>
         <div className="mb-3">
-          New customer?{" "}
-          <Link to={`/signup?redirect=${redirect}`}>Create your acount</Link>
+          Musanganwe konti?{" "}
+          <Link to={`/signup?redirect=${redirect}`}>Fungura konti</Link>
         </div>
       </Form>
     </Container>
-    // mettre cyane
   );
 }

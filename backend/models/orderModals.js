@@ -19,10 +19,11 @@ const orderSchema = new mongoose.Schema(
     ],
     shippingAddress: {
       fullName: { type: String, required: true },
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postCode: { type: String, required: true },
-      country: { type: String, required: true },
+      umudugudu: { type: String, required: true },
+      akagali: { type: String, required: true },
+      umurenge: { type: String, required: true },
+      akarere: { type: String, required: true },
+      phone: { type: String, required: true },
       location: {
         lat: Number,
         lng: Number,

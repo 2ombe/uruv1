@@ -81,33 +81,34 @@ export default function PlaceOrderScreen() {
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Helmet>
-        <title>Gutumiza Ibicuruzwa</title>
+        <title>Gutumiza</title>
       </Helmet>
       <Row>
         <Col md={8}>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Claim Review</Card.Title>
+              <Card.Title>Incamake</Card.Title>
               <Card.Text>
-                <strong>Names:</strong>
+                <strong>Amazina:</strong>
                 {cart.shippingAddress.fullName}
                 <br />
-                <strong>Location:</strong>
-                {cart.shippingAddress.address},{cart.shippingAddress.city},
-                {cart.shippingAddress.postCode},{cart.shippingAddress.country}
+                <strong>Aho muherereye:</strong>
+                {cart.shippingAddress.umudugudu},{cart.shippingAddress.akagali},
+                {cart.shippingAddress.umurenge},{cart.shippingAddress.akarere},
+                {cart.shippingAddress.phone}
               </Card.Text>
-              <Link to="/shipping">Edit</Link>
+              <Link to="/shipping">Vugurura Amakuru</Link>
             </Card.Body>
           </Card>
 
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Payment</Card.Title>
+              <Card.Title>Ubwishyu</Card.Title>
               <Card.Text>
-                <strong>Payment method:</strong>
+                <strong>Uburyo mwakoresheje:</strong>
                 {cart.paymentMethod}
               </Card.Text>
-              <Link to="/payment">Edit</Link>
+              <Link to="/payment">Vugurura Amakuru</Link>
             </Card.Body>
           </Card>
 
@@ -134,36 +135,36 @@ export default function PlaceOrderScreen() {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Link to="/cart">Edit</Link>
+              <Link to="/cart">Vugurura Amakuru</Link>
             </Card.Body>
           </Card>
         </Col>
         <Col md={4}>
           <Card.Body>
-            <Card.Title>Cost</Card.Title>
+            <Card.Title>Igiciro</Card.Title>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <Row>
-                  <Col>Items</Col>
+                  <Col>Icyangombwa</Col>
                   <Col>{cart.itemsPrice.toFixed(2)}RWF</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Delivery</Col>
+                  <Col>Ayo kukikuzanira</Col>
                   <Col>{cart.shippingPrice.toFixed(2)}RWF</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Tax</Col>
+                  <Col>Komisiyo</Col>
                   <Col>{cart.taxPrice.toFixed(2)}RWF</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>
-                    <strong> Total</strong>
+                    <strong> yose hamwe</strong>
                   </Col>
                   <Col>
                     <strong>{cart.totalPrice.toFixed(2)}RWF</strong>
@@ -177,7 +178,7 @@ export default function PlaceOrderScreen() {
                     onClick={placeOrderHandler}
                     disabled={cart.cartItems.length === 0}
                   >
-                    Continue
+                    Komeza
                   </Button>
                 </div>
                 {loading && <LoadingBox></LoadingBox>}

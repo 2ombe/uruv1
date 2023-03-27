@@ -14,10 +14,11 @@ export default function ShippingAddress() {
     cart: { shippingAddress },
   } = state;
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
-  const [address, setAddress] = useState(shippingAddress.address || "");
-  const [city, setCity] = useState(shippingAddress.city || "");
-  const [postCode, setPostCode] = useState(shippingAddress.postCode || "");
-  const [country, setCountry] = useState(shippingAddress.country || "");
+  const [umudugudu, setMudugudu] = useState(shippingAddress.umudugudu || "");
+  const [akagali, setKagali] = useState(shippingAddress.akagali || "");
+  const [umurenge, setMurenge] = useState(shippingAddress.umurenge || "");
+  const [akarere, setKarere] = useState(shippingAddress.akarere || "");
+  const [phone, setPhone] = useState(shippingAddress.phone || "");
   useEffect(() => {
     navigate("/signin?redirect=/shipping");
   }, [userInfo, navigate]);
@@ -25,11 +26,11 @@ export default function ShippingAddress() {
     e.preventDefault();
     ctxDispatch({
       type: "SAVE_SHIPPING_ADDRESS",
-      payload: { fullName, address, city, postCode, country },
+      payload: { fullName, umudugudu, akagali, umurenge, akarere, phone },
     });
     localStorage.setItem(
       "shippingAddress",
-      JSON.stringify({ fullName, address, city, postCode, country })
+      JSON.stringify({ fullName, umudugudu, akagali, umurenge, akarere, phone })
     );
     navigate("/payment");
   };
@@ -40,10 +41,10 @@ export default function ShippingAddress() {
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className="container small-container">
-        <h1 className="my-3">Your Address</h1>
+        <h1 className="my-3">Imwirondoro</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="fullName">
-            <Form.Label>Full Name</Form.Label>
+            <Form.Label>Amazina yombi</Form.Label>
             <Form.Control
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -51,40 +52,48 @@ export default function ShippingAddress() {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="address">
-            <Form.Label>Sector</Form.Label>
+            <Form.Label>Umudugudu</Form.Label>
             <Form.Control
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={umudugudu}
+              onChange={(e) => setMudugudu(e.target.value)}
               required
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>City</Form.Label>
+            <Form.Label>Akagali</Form.Label>
             <Form.Control
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={akagali}
+              onChange={(e) => setKagali(e.target.value)}
               required
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Street</Form.Label>
+            <Form.Label>Umurenge</Form.Label>
             <Form.Control
-              value={postCode}
-              onChange={(e) => setPostCode(e.target.value)}
+              value={umurenge}
+              onChange={(e) => setMurenge(e.target.value)}
               required
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>District</Form.Label>
+            <Form.Label>Akarere</Form.Label>
             <Form.Control
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              value={akarere}
+              onChange={(e) => setKarere(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Nomero ya telephone</Form.Label>
+            <Form.Control
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               required
             />
           </Form.Group>
           <div className="mb-3">
             <Button variant="primary" type="submit">
-              Continue
+              Komeza
             </Button>
           </div>
         </Form>

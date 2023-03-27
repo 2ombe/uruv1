@@ -50,14 +50,14 @@ export default function SignupScreen() {
       <Helmet>
         <title>Sign Up</title>
       </Helmet>
-      <h1 className="my-3">Sign Up</h1>
+      <h1 className="my-3">Iyandikishe</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="my-3" controlId="name">
-          <Form.Label>name</Form.Label>
+          <Form.Label>Izina</Form.Label>
           <Form.Control onChange={(e) => setName(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Emeli</Form.Label>
           <Form.Control
             type="email"
             required
@@ -65,7 +65,7 @@ export default function SignupScreen() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Ijambo banga</Form.Label>
           <Form.Control
             type="password"
             required
@@ -73,7 +73,7 @@ export default function SignupScreen() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="confirmpassword">
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Emeza ijambo banga</Form.Label>
           <Form.Control
             type="password"
             required
@@ -81,11 +81,11 @@ export default function SignupScreen() {
           />
         </Form.Group>
         <div className="mb-3">
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit">Emeza</Button>
         </div>
         <div className="mb-3">
-          Already have an account{" "}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+          Nsanganwe konti{" "}
+          <Link to={`/signin?redirect=${redirect}`}>Injira</Link>
         </div>
       </Form>
     </Container>

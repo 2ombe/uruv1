@@ -132,12 +132,12 @@ export default function ProductListScreen() {
     <div>
       <Row>
         <Col>
-          <h1>Products</h1>
+          <h1>Ibyabonetse</h1>
         </Col>
         <Col className="col text-end">
           <div>
             <Button type="button" onClick={createHandler}>
-              Create Product
+              Andika igishya
             </Button>
           </div>
         </Col>
@@ -156,10 +156,10 @@ export default function ProductListScreen() {
                 <th>ID</th>
                 <th>NAME</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th>County in stock</th>
-                <th>COST</th>
-                <th>PRICE</th>
+
+                <th>umubare wabyo</th>
+
+                <th>Igiciro cyo kugitumiza</th>
               </tr>
             </thead>
             <tbody>
@@ -168,9 +168,7 @@ export default function ProductListScreen() {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
                   <td>{product.countInStock}</td>
-                  <td> {product.costPrice}</td>
                   <td>{product.price}</td>
                   <td>
                     <Button

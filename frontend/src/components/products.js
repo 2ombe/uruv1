@@ -115,10 +115,10 @@ function Product(props) {
           <Card.Text>{product.price} RWF</Card.Text>
           {product.countInStock === 0 ? (
             <Button variant="light" disabled>
-              Byashize mububiko
+              Byabonye nyirabyo
             </Button>
           ) : (
-            <Button onClick={() => addToCartHandler(product)}>claim</Button>
+            <Button onClick={() => addToCartHandler(product)}>Tumiza</Button>
           )}
         </Card.Body>
       </Card>

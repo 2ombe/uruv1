@@ -156,7 +156,7 @@ export default function ProductListScreen() {
                 <th>ID</th>
                 <th>NAME</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
+
                 <th>number</th>
 
                 <th>PRICE</th>
@@ -168,7 +168,7 @@ export default function ProductListScreen() {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
+
                   <td>{product.countInStock}</td>
 
                   <td>{product.price}</td>

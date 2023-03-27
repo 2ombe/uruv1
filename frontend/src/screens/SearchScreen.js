@@ -139,11 +139,11 @@ export default function SearchScreen() {
   return (
     <div>
       <Helmet>
-        <title>Search Products</title>
+        <title>Shakisha</title>
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Umwihariko</h3>
+          <h3>Shakisha</h3>
           <div>
             <ul>
               <li>
@@ -190,7 +190,7 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            <h3>Ababikunze</h3>
+            <h3>Abarebye ko ari ibabo</h3>
             <ul>
               {ratings.map((r) => (
                 <li key={r.izina}>
@@ -250,19 +250,12 @@ export default function SearchScreen() {
                     }}
                   >
                     <option value="newest">Ibishya</option>
-                    <option value="lowest">
-                      Igiciro: Ibihendutse-Kubihenze
-                    </option>
-                    <option value="highest">
-                      Igiciro: Ibihenze-Kubihendutse
-                    </option>
-                    <option value="toprated">Umubare wababikunze</option>
+
+                    <option value="toprated">Umubare wababishatse</option>
                   </select>
                 </Col>
               </Row>
-              {products.length === 0 && (
-                <MessageBox>Nta gicuruzwa kibonetse</MessageBox>
-              )}
+              {products.length === 0 && <MessageBox>Ntacyabonetse</MessageBox>}
 
               <Row>
                 {products.map((product) => (

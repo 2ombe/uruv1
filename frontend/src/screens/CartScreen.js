@@ -28,13 +28,13 @@ export default function CartScreen() {
       <Helmet>
         <title>Your property</title>
       </Helmet>
-      <h1>Your property</h1>
+      <h1>Kurikirana</h1>
 
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              go and select item. <Link to="/">select item</Link>
+              Ntacyo mwahisemo. <Link to="/">Hitamo</Link>
             </MessageBox>
           ) : (
             <ListGroup>
@@ -50,7 +50,7 @@ export default function CartScreen() {
                       <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}></Col>
-                    <Col md={3}>{item.price} RWF</Col>
+                    <Col md={3}>Igiciro: {item.price} RWF</Col>
 
                     <Col md={2}>
                       <Button
@@ -72,7 +72,7 @@ export default function CartScreen() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>
-                    selected quantity: (
+                    Ibyo mwatoye: (
                     {cartItems.reduce((a, c) => a + c.quantity, 0)} )
                   </h3>
                   {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)} RWF
@@ -84,7 +84,7 @@ export default function CartScreen() {
                     onClick={checkoutHandler}
                     disabled={cartItems.length === 0}
                   >
-                    Continue
+                    Komeza
                   </Button>
                 </div>
               </ListGroup>

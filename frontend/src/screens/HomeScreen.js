@@ -8,11 +8,6 @@ import Col from "react-bootstrap/Col";
 import Product from "../components/products";
 import { Helmet } from "react-helmet-async";
 import MessageBox from "../components/MessageBox";
-import { Store } from "../Store";
-import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
-import { getError } from "../utils";
-import Button from "react-bootstrap/Button";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -34,8 +29,6 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
-  const { state } = useContext(Store);
-  const { userInfo } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,48 +44,11 @@ function HomeScreen() {
     fetchData();
   }, []);
 
-  const createHandler = async () => {
-    if (window.confirm("Are you sure to create?")) {
-      try {
-        dispatch({ type: "CREATE_REQUEST" });
-        const { data } = await axios.post(
-          "/api/products",
-          {},
-          {
-            headers: { Authorization: `Bearer ${userInfo.token}` },
-          }
-        );
-        toast.success("product created successfully");
-        dispatch({ type: "CREATE_SUCCESS" });
-        Navigate(`/admin/product/${data.product}`);
-      } catch (err) {
-        toast.error(getError(error));
-        dispatch({
-          type: "CREATE_FAIL",
-        });
-      }
-    }
-  };
-
   return (
     <div>
       <Helmet>
         <title>Uruvu</title>
       </Helmet>
-
-      <Row style={{ left: "0" }}>
-        <Col>
-          <h1>Items</h1>
-        </Col>
-
-        <Col className="col text-end">
-          <div>
-            <Button type="button" onClick={createHandler}>
-              Post item
-            </Button>
-          </div>
-        </Col>
-      </Row>
 
       <div className="products">
         {loading ? (

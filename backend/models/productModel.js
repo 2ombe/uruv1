@@ -13,9 +13,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "./no-image.png",
     },
-    brand: {
-      type: String,
-    },
+
     category: {
       type: String,
     },

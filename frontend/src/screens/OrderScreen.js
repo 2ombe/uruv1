@@ -200,31 +200,32 @@ export default function OrderScreen() {
               <Card.Title>Address</Card.Title>
               <Card.Text>
                 <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {order.shippingAddress.address},
-                {order.shippingAddress.city}, {order.shippingAddress.postalCode}
-                ,{order.shippingAddress.country}
+                <strong>Address: </strong> {order.shippingAddress.umurenge},
+                {order.shippingAddress.akagali},{" "}
+                {order.shippingAddress.umurenge},{order.shippingAddress.akarere}
+                ,{order.shippingAddress.phone}
               </Card.Text>
               {order.isDelivered ? (
                 <MessageBox variant="success">
-                  Delivered at {order.deliveredAt}
+                  Igihe yayiherewe {order.deliveredAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant="danger">Not Delivered</MessageBox>
+                <MessageBox variant="danger">Yamugezeho</MessageBox>
               )}
             </Card.Body>
           </Card>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Payment</Card.Title>
+              <Card.Title>Ubwishyu</Card.Title>
               <Card.Text>
-                <strong>Method:</strong> {order.paymentMethod}
+                <strong>Uburyo bwo kwishyurwa:</strong> {order.paymentMethod}
               </Card.Text>
               {order.isPaid ? (
                 <MessageBox variant="success">
-                  Paid at: {order.paidAt}
+                  Igihe yishyuriye: {order.paidAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant="danger">Not Paid</MessageBox>
+                <MessageBox variant="danger">Ntiyishyuye</MessageBox>
               )}
             </Card.Body>
           </Card>
@@ -258,30 +259,30 @@ export default function OrderScreen() {
         <Col md={4}>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Summary</Card.Title>
+              <Card.Title>Incamake</Card.Title>
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Items</Col>
+                    <Col>Ibyo mwahisemo</Col>
                     <Col>RWF{order.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Shipping</Col>
+                    <Col>amafaranga yo kukikugezaho</Col>
                     <Col>RWF{order.shippingPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Tax</Col>
+                    <Col>Komisiyo</Col>
                     <Col>RWF{order.taxPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong>Total</strong>
+                      <strong>Yose hamwe</strong>
                     </Col>
                     <Col>
                       <strong>RWF{order.totalPrice.toFixed(2)}</strong>
@@ -310,7 +311,7 @@ export default function OrderScreen() {
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     <div className="d-grid">
                       <Button type="button" onClick={deliverOrderHandler}>
-                        Deliver Claim
+                        Emeza
                       </Button>
                     </div>
                   </ListGroup.Item>
