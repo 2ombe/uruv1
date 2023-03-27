@@ -124,6 +124,13 @@ function ProductScreen() {
   ) : (
     <div>
       <Row>
+        <Col md={6}>
+          <img
+            className="img-large"
+            src={selectedImage || product.image}
+            alt={product.name}
+          ></img>
+        </Col>
         <Col md={3}>
           <ListGroup variant="flush">
             <ListGroup.Item>
@@ -132,7 +139,12 @@ function ProductScreen() {
               </Helmet>
               <h1>{product.name}</h1>
             </ListGroup.Item>
-
+            <ListGroup.Item>
+              <Rating
+                rating={product.rating}
+                numReviews={product.numReviews}
+              ></Rating>
+            </ListGroup.Item>
             <ListGroup.Item>
               Igiciro mwishyura : RWF{product.price}
             </ListGroup.Item>
@@ -155,7 +167,7 @@ function ProductScreen() {
               </Row>
             </ListGroup.Item>
             <ListGroup.Item>
-              UBusobanuro:
+              Umusobanuro:
               <p>{product.description}</p>
             </ListGroup.Item>
           </ListGroup>
@@ -166,7 +178,7 @@ function ProductScreen() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Igiciro whishyura:</Col>
+                    <Col>Igiciro cyo kugitumiza:</Col>
                     <Col>Rwf{product.price}</Col>
                   </Row>
                 </ListGroup.Item>
@@ -231,7 +243,6 @@ function ProductScreen() {
               Injira
             </MessageBox>
           )}
-          {/* <div>new changes</div> */}
         </div>
       </div>
     </div>
