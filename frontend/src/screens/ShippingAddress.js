@@ -20,7 +20,9 @@ export default function ShippingAddress() {
   const [akarere, setKarere] = useState(shippingAddress.akarere || "");
   const [phone, setPhone] = useState(shippingAddress.phone || "");
   useEffect(() => {
-    navigate("/signin?redirect=/shipping");
+    if (!userInfo) {
+      navigate("/signin?redirect=/shipping");
+    }
   }, [userInfo, navigate]);
   const submitHandler = (e) => {
     e.preventDefault();
