@@ -14,6 +14,10 @@ uploadRouter.post(
   isAdmin,
   upload.single("file"),
   async (req, res) => {
+    if (!req.file) {
+      return res.status(400).send({ message: "No file uploaded" });
+    }
+
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
       api_key: process.env.CLOUDINARY_API_KEY,
@@ -31,8 +35,12 @@ uploadRouter.post(
         streamifier.createReadStream(req.file.buffer).pipe(stream);
       });
     };
-    const result = await streamUpload(req);
+    const result = await streamUpload(req).catch((error) => {
+      console.error(error);
+      res.status(500).send({ message: "Error uploading file" });
+    });
     res.send(result);
   }
 );
+
 export default uploadRouter;

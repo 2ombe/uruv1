@@ -6,7 +6,7 @@ import productRouter from "./Routes/productRoutes.js";
 import userRouter from "./Routes/userRoutes.js";
 import orderRouter from "./Routes/orderRoute.js";
 import uploadRouter from "./Routes/uploadRoutes.js";
-import info from "./info.js";
+import seedRouter from "./Routes/seedRoutes.js";
 
 dotenv.config();
 
@@ -31,43 +31,17 @@ app.get("/api/keys/google", (req, res) => {
   res.send({ key: process.env.GOOGLE_API_KEY || "" });
 });
 
-//app.use("/api/seed", seedRouter);
+app.use("/api/upload", uploadRouter);
+app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
-app.use("/api/upload", uploadRouter);
-
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
-});
-app.get("/api/reports", (req, res) => {
-  res.send(info.info);
-});
-
-app.get("/api/products/slug/:slug", (req, res) => {
-  const product = data.products.find((x) => x.slug === req.params.slug);
-
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product not found" });
-  }
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const product = data.products.find((x) => x._id === req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/frontend/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/frontend/build/index.html"));
-});
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });

@@ -57,6 +57,7 @@ export default function ProductEditScreen() {
   const [slug, setSlug] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
+  const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
@@ -70,8 +71,7 @@ export default function ProductEditScreen() {
         setName(data.name);
         setSlug(data.slug);
         setPrice(data.price);
-
-        setImage(data.image);
+        setImages(data.images);
         setCategory(data.category);
         setCountInStock(data.countInStock);
         setBrand(data.brand);
@@ -89,33 +89,34 @@ export default function ProductEditScreen() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch({ type: "UPDATE_REQUEST" });
-    await axios.put(
-      `/api/products/${productId}`,
-      {
-        _id: productId,
-        name,
-        slug,
-        price,
-        image,
-        category,
-
-        countInStock,
-        description,
-      },
-      {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      }
-    );
-    dispatch({
-      type: "UPDATE_SUCCESS",
-    });
-    toast.success("Amakuru yavuguruwe");
-    navigate("/");
     try {
+      dispatch({ type: "UPDATE_REQUEST" });
+      await axios.put(
+        `/api/products/${productId}`,
+        {
+          _id: productId,
+          name,
+          slug,
+          price,
+          image,
+          images,
+          category,
+          brand,
+          countInStock,
+          description,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({
+        type: "UPDATE_SUCCESS",
+      });
+      toast.success("Product updated successfully");
+      navigate("/admin/products");
     } catch (err) {
       toast.error(getError(err));
-      dispatch({ type: "UPDATE_FAIL", payload: getError(err) });
+      dispatch({ type: "UPDATE_FAIL" });
     }
   };
 
@@ -180,18 +181,13 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="image">
-            <Form.Label>Ifoto</Form.Label>
-            <Form.Control
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              required
-            />
+            <Form.Group className="mb-3" controlId="imageFile">
+              <Form.Label>Upload File</Form.Label>
+              <Form.Control type="file" onChange={uploadFileHandler} />
+              {loadingUpload && <LoadingBox></LoadingBox>}
+            </Form.Group>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="imageFile">
-            <Form.Label>Shyiraho Ifoto</Form.Label>
-            <Form.Control type="file" onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group>
+
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>kategori</Form.Label>
             <Form.Control

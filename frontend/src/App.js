@@ -37,6 +37,7 @@ import UserEditScreen from "./screens/UserEditScreen";
 
 import Iyandikishe from "./screens/Irandikishe";
 import ProductListScreen from "./screens/productListScreen copy";
+import HomePage from "./screens/Landing";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -101,7 +102,6 @@ function App() {
               </LinkContainer>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <SearchBox />
                 <Nav className="me-auto w-100 justify-content-end ">
                   <Link to="/cart" className="nav-link">
                     Claim
@@ -270,7 +270,7 @@ function App() {
                   </AdminRoute>
                 }
               />
-              <Route path="/" element={<HomeScreen />} />
+              <Route path="/" element={<HomePage />} />
             </Routes>
           </Container>
         </main>
