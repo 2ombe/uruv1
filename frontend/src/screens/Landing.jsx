@@ -51,7 +51,10 @@ const HomePage = () => {
                 style={{ fontSize: "200px" }}
               />
               <Card.Body>
-                <Card.Title>ID Card</Card.Title>
+                <Card.Title>
+                  Indangamuntu{" "}
+                  <span style={{ color: "blue" }}>Identity Card</span>
+                </Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -60,7 +63,7 @@ const HomePage = () => {
               <BsFillBagFill className="link" style={{ fontSize: "200px" }} />
               <Card.Body>
                 <Card.Title>
-                  Ibikapu <span>Bag</span>
+                  Ibikapu <span style={{ color: "blue" }}>Bag</span>
                 </Card.Title>
               </Card.Body>
             </Card>
@@ -69,7 +72,10 @@ const HomePage = () => {
             <Card>
               <GiPassport className="link" style={{ fontSize: "200px" }} />
               <Card.Body>
-                <Card.Title>Passport</Card.Title>
+                <Card.Title>
+                  Urupapuro rw'inzira{" "}
+                  <span style={{ color: "blue" }}>Passport</span>
+                </Card.Title>
               </Card.Body>
             </Card>
           </Col>
@@ -78,7 +84,7 @@ const HomePage = () => {
               <MdComputer className="link" style={{ fontSize: "200px" }} />
               <Card.Body>
                 <Card.Title>
-                  mudasobwa <span>Computer</span>
+                  mudasobwa <span style={{ color: "blue" }}>Computer</span>
                 </Card.Title>
               </Card.Body>
             </Card>
@@ -94,7 +100,7 @@ const HomePage = () => {
               <Card.Body>
                 <Card.Title>
                   {" "}
-                  Telefone <span> Phone</span>
+                  Telefone <span style={{ color: "blue" }}> Phone</span>
                 </Card.Title>
               </Card.Body>
             </Card>
@@ -115,7 +121,8 @@ const HomePage = () => {
               />
               <Card.Body>
                 <Card.Title>
-                  Cyangombwa cyo gutwara <span>Permi</span>
+                  Cyangombwa cyo gutwara{" "}
+                  <span style={{ color: "blue" }}>Permi</span>
                 </Card.Title>
               </Card.Body>
             </Card>
@@ -128,7 +135,7 @@ const HomePage = () => {
               />
               <Card.Body>
                 <Card.Title>
-                  Izindi karita <span>Card</span>
+                  Izindi karita <span style={{ color: "blue" }}>Card</span>
                 </Card.Title>
               </Card.Body>
             </Card>

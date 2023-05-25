@@ -34,7 +34,7 @@ export default function CartScreen() {
         <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              Ntacyo mwahisemo. <Link to="/">Hitamo</Link>
+              Ntacyo mwahisemo. <Link to="/list">Hitamo</Link>
             </MessageBox>
           ) : (
             <ListGroup>

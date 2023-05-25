@@ -28,13 +28,13 @@
 
 @keyframes itemAnimation {
   0% {
-    transform: translate3d(-10px, -10px, -10px);
+    transform: translateX(-10px, -10px, -10px);
   }
   50% {
-    transform: translate3d(10px, 10px, 10px);
+    transform: translateX(10px, 10px, 10px);
   }
   100% {
-    transform: translate3d(-10px, -10px, -10px);
+    transform: translateX(-10px, -10px, -10px);
   }
 }
 

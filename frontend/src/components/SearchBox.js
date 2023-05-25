@@ -13,14 +13,14 @@ export default function SearchBox() {
     navigate(query ? `/search/?query=${query}` : "/search");
   };
   return (
-    <Form className="d-flex me-auto" onSubmit={submitHandler}>
+    <Form className="d-flex me-auto link" onSubmit={submitHandler}>
       <InputGroup>
         <FormControl
           type="text"
           name="q"
           id="q"
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="search products..."
+          placeholder="Shyiramo nimero y'icyangombwa mushakisha cyangwa izina ryacyo..."
           aria-label="search Products"
           aria-describedby="button-search"
         ></FormControl>

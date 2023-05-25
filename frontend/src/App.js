@@ -78,7 +78,7 @@ function App() {
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar
-            style={{ backgroundColor: "Green" }}
+            style={{ backgroundColor: "rgb(6, 3, 73)" }}
             variant="dark"
             expand="lg"
           >
@@ -89,13 +89,15 @@ function App() {
               >
                 <i className="fas fa-bars"></i>
               </Button>
-              <LinkContainer to="/">
+              <LinkContainer to="/list">
                 <Navbar.Brand>
                   <img
                     src="/images/capture.png"
                     width={40}
                     height={40}
-                    style={{ borderRadius: "50%" }}
+                    style={{
+                      borderRadius: "50%",
+                    }}
                     alt="logo"
                   />
                 </Navbar.Brand>
@@ -271,6 +273,7 @@ function App() {
                 }
               />
               <Route path="/" element={<HomePage />} />
+              <Route path="/list" element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>

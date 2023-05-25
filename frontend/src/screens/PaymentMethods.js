@@ -53,7 +53,7 @@ export default function PaymentMethods() {
           </div>
 
           <div className="mb-3">
-            <Button type="submit">Continue</Button>
+            <Button type="submit">Komeza</Button>
           </div>
         </Form>
       </div>

@@ -13,7 +13,7 @@ export default function Iyandikishe() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
-  const redirect = redirectInUrl ? redirectInUrl : "/";
+  const redirect = redirectInUrl ? redirectInUrl : "/list";
   const [email, setEmail] = useState(" ");
   const [password, setPassword] = useState("");
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -27,7 +27,7 @@ export default function Iyandikishe() {
       });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      navigate(redirect || "/");
+      navigate(redirect || "/list");
     } catch (err) {
       toast.error(getError(err));
     }

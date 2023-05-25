@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import CheckoutSteps from "../components/Checksteps";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 export default function ShippingAddress() {
   const navigate = useNavigate();
@@ -18,7 +20,7 @@ export default function ShippingAddress() {
   const [akagali, setKagali] = useState(shippingAddress.akagali || "");
   const [umurenge, setMurenge] = useState(shippingAddress.umurenge || "");
   const [akarere, setKarere] = useState(shippingAddress.akarere || "");
-  const [phone, setPhone] = useState(shippingAddress.phone || "");
+  const [phone, setPhone] = useState(shippingAddress.phone || "RW");
   useEffect(() => {
     if (!userInfo) {
       navigate("/signin?redirect=/shipping");
@@ -87,10 +89,11 @@ export default function ShippingAddress() {
           </Form.Group>
           <Form.Group>
             <Form.Label>Nomero ya telephone</Form.Label>
-            <Form.Control
+            <PhoneInput
+              defaultCountry="RW"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
+              onChange={setPhone}
+              placeholder="+250 789654567"
             />
           </Form.Group>
           <div className="mb-3">
