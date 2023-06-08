@@ -106,7 +106,7 @@ function App() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto w-100 justify-content-end ">
                   <Link to="/cart" className="nav-link">
-                    Claim
+                    Tumiza
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
                         {cart.cartItems.length}
@@ -117,7 +117,7 @@ function App() {
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
-                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                        <NavDropdown.Item>Imyirondoro</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/orderhistory">
                         <NavDropdown.Item>History</NavDropdown.Item>
@@ -128,25 +128,27 @@ function App() {
                         to="#signout"
                         onClick={signoutHandler}
                       >
-                        Sign Out
+                        Sohoka
                       </Link>
                     </NavDropdown>
                   ) : (
                     <Link className="nav-link" to="/signin">
-                      Sign In
+                      Injira
                     </Link>
                   )}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
-                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                        <NavDropdown.Item>Amakuru</NavDropdown.Item>
                       </LinkContainer>
 
                       <LinkContainer to="/admin/orders">
-                        <NavDropdown.Item>Claims</NavDropdown.Item>
+                        <NavDropdown.Item>
+                          Abyabonye ba nyirabyo
+                        </NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/admin/product">
-                        <NavDropdown.Item>items</NavDropdown.Item>
+                        <NavDropdown.Item>Ububiko</NavDropdown.Item>
                       </LinkContainer>
                       <LinkContainer to="/admin/users">
                         <NavDropdown.Item>users</NavDropdown.Item>
