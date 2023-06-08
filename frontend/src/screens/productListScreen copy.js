@@ -63,12 +63,8 @@ export default function ProductListScreen() {
   const sp = new URLSearchParams(search);
   const page = sp.get("page") || 1;
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-
-  const {
-    userInfo,
-    cart: { cartItems },
-  } = state;
+  const { state } = useContext(Store);
+  const { userInfo } = state;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,7 +128,7 @@ export default function ProductListScreen() {
     <div>
       <Row>
         <Col>
-          <h1>Items</h1>
+          <h1>Ububiko</h1>
         </Col>
         <Col className="col text-end">
           <div>
@@ -153,32 +149,27 @@ export default function ProductListScreen() {
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>CATEGORY</th>
+                <th>Izina</th>
+                <th>Igiciro</th>
+                <th>Kategori</th>
 
-                <th>number</th>
-
-                <th>PRICE</th>
+                <th>IBIKORWA</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td>{product._id}</td>
                   <td>{product.name}</td>
+                  <td>{product.price}</td>
                   <td>{product.category}</td>
 
-                  <td>{product.countInStock}</td>
-
-                  <td>{product.price}</td>
                   <td>
                     <Button
                       type="button"
                       variant="light"
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
-                      Edit
+                      Vugurura
                     </Button>
                     &nbsp;
                     <Button
@@ -186,7 +177,7 @@ export default function ProductListScreen() {
                       variant="light"
                       onClick={() => deleteHandler(product)}
                     >
-                      Delete
+                      Siba
                     </Button>
                   </td>
                 </tr>

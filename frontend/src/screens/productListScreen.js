@@ -154,8 +154,8 @@ export default function ProductListScreen() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>NAME</th>
-                <th>CATEGORY</th>
+                <th>Izina</th>
+                <th>Categori</th>
 
                 <th>umubare wabyo</th>
 

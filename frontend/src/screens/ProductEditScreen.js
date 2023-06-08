@@ -113,7 +113,7 @@ export default function ProductEditScreen() {
         type: "UPDATE_SUCCESS",
       });
       toast.success("Product updated successfully");
-      navigate("/admin/products");
+      //navigate("/admin/products");
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: "UPDATE_FAIL" });

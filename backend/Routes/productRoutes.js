@@ -16,16 +16,17 @@ productRouter.post(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      name: "sample name " + Date.now(),
-      slug: "sample-name-" + Date.now(),
+      name: "Indangamuntu " + Date.now(),
+      slug: "1 1126 546757 045" + Date.now(),
       image: "/images/p1.jpg",
       price: 0,
-      category: "sample category",
+      category: "Indangamuntu",
       brand: "sample brand",
       countInStock: 0,
       rating: 0,
       numReviews: 0,
-      description: "sample description",
+      createdBy: req.user,
+      description: "tanga ubusobanuro",
     });
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
@@ -47,7 +48,8 @@ productRouter.put(
       product.images = req.body.images;
       product.category = req.body.category;
       product.brand = req.body.brand;
-      product.countInStock = req.body.countInStock;
+      (product.createdBy = req.user),
+        (product.countInStock = req.body.countInStock);
       product.description = req.body.description;
       await product.save();
       res.send({ message: "Product Updated" });
