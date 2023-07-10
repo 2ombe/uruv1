@@ -7,6 +7,7 @@ import userRouter from "./Routes/userRoutes.js";
 import orderRouter from "./Routes/orderRoute.js";
 import uploadRouter from "./Routes/uploadRoutes.js";
 import seedRouter from "./Routes/seedRoutes.js";
+import paymentRouter from "./Routes/momoRoute.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/momo", paymentRouter);
 
 const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/frontend/build")));

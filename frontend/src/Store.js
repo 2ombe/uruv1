@@ -1,31 +1,31 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useEffect, useReducer, useState } from 'react';
 
 export const Store = createContext();
 
 const initialState = {
-  userInfo: localStorage.getItem("userInfo")
-    ? JSON.parse(localStorage.getItem("userInfo"))
+  userInfo: localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
     : null,
   cart: {
-    shippingAddress: localStorage.getItem("shippingAddress")
-      ? JSON.parse(localStorage.getItem("shippingAddress"))
+    shippingAddress: localStorage.getItem('shippingAddress')
+      ? JSON.parse(localStorage.getItem('shippingAddress'))
       : {},
 
-    report: localStorage.getItem("report")
-      ? JSON.parse(localStorage.getItem("report"))
+    report: localStorage.getItem('report')
+      ? JSON.parse(localStorage.getItem('report'))
       : {},
-    paymentMethod: localStorage.getItem("paymentMethod")
-      ? localStorage.getItem("paymentMethod")
-      : "",
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
+    paymentMethod: localStorage.getItem('paymentMethod')
+      ? localStorage.getItem('paymentMethod')
+      : '',
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
   },
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "CART_ADD_ITEM":
+    case 'CART_ADD_ITEM':
       // add to cart
 
       const newItem = action.payload;
@@ -38,24 +38,27 @@ function reducer(state, action) {
           )
         : [...state.cart.cartItems, newItem];
 
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
       return { ...state, cart: { ...state.cart, cartItems } };
-    case "CART_REMOVE_ITEM": {
+    case 'CART_REMOVE_ITEM': {
       const cartItems = state.cart.cartItems.filter(
         (item) => item._id !== action.payload._id
       );
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
-    case "CART_CLEAR":
+    case 'CART_CLEAR':
       return { ...state, cart: { ...state.cart, cartItems: [] } };
 
-    case "USER_SIGNIN":
+    case 'ACCEPT_TERMS':
+      return { ...state, acceptedTerms: true };
+
+    case 'USER_SIGNIN':
       return { ...state, userInfo: action.payload };
-    case "CREATE_REPORT":
+    case 'CREATE_REPORT':
       return { ...state, report: action.payload };
-    case "USER_SIGNOUT":
+    case 'USER_SIGNOUT':
       return {
         ...state,
         userInfo: null,
@@ -63,10 +66,10 @@ function reducer(state, action) {
           cartItems: [],
           shippingAddress: {},
           report: {},
-          paymentMethod: "",
+          paymentMethod: '',
         },
       };
-    case "SAVE_SHIPPING_ADDRESS":
+    case 'SAVE_SHIPPING_ADDRESS':
       return {
         ...state,
         cart: {
@@ -74,12 +77,12 @@ function reducer(state, action) {
           shippingAddress: action.payload,
         },
       };
-    case "REPORT":
+    case 'REPORT':
       return {
         ...state,
         cart: { ...state.cart, report: action.payload },
       };
-    case "SAVE_PAYMENT_METHOD":
+    case 'SAVE_PAYMENT_METHOD':
       return {
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
@@ -91,6 +94,13 @@ function reducer(state, action) {
 
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = { state, dispatch };
+  const [acceptedTerms, setAcceptedTerms] = useState(
+    localStorage.getItem('acceptedTerms') === 'true'
+  );
+
+  useEffect(() => {
+    localStorage.setItem('acceptedTerms', acceptedTerms);
+  }, [acceptedTerms]);
+  const value = { state, dispatch, acceptedTerms, setAcceptedTerms };
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
