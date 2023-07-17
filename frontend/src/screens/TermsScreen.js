@@ -14,11 +14,12 @@ const TermsAndConditions = () => {
         Welcome to our website. If you continue to browse and use this website,
         you are agreeing to comply with and be bound by the following terms and
         conditions of use. If you disagree with any part of these terms and
-        conditions, please do not use our website.
+        conditions, please do not use our website. Terms and condition are
+        governed by Rwanda data protection policy.
       </p>
       <p>
-        The term ‘(uruvu)’ or ‘us’ or ‘we’ refers to the owner of the website.
-        The term ‘you’ refers to the user or viewer of our website.
+        The term 'Mtandao ltd' or ‘us’ or ‘we’ refers to the owner of the
+        website. The term ‘you’ refers to the user or viewer of our website.
       </p>
       <p>
         This Website offers lost and found items (“National card, visa card,
@@ -38,22 +39,21 @@ const TermsAndConditions = () => {
       </p>
       <p>
         This Terms of Service Agreement (the "Agreement") governs your use of
-        this website, (URUVU360") offer of lost and found items on this Website.
+        this website, (URUVU") offer of lost and found items on this Website.
         This Agreement includes, and incorporates by this reference, the
-        policies and guidelines referenced below. (URUVU360) reserves the right
-        to change or revise the terms and conditions of this Agreement at any
-        time by posting any changes or a revised Agreement on this Website.
-        (URUVU360) will alert you that changes or revisions have been made by
-        indicating on the top of this Agreement the date it was last revised.
-        The changed or revised Agreement will be effective immediately after it
-        is posted on this Website. Your use of the Website following the posting
-        of any such changes or of a revised Agreement will constitute your
-        acceptance of any such changes or revisions. (URUVU360) encourages you
-        to review this Agreement whenever you visit the Website to make sure
-        that you understand the terms and conditions governing use of the
-        Website. If you do not agree to this Agreement (including any referenced
-        policies or guidelines), please immediately terminate your use of the
-        Website.
+        policies and guidelines referenced below. (URUVU) reserves the right to
+        change or revise the terms and conditions of this Agreement at any time
+        by posting any changes or a revised Agreement on this Website. (URUVU)
+        will alert you that changes or revisions have been made by indicating on
+        the top of this Agreement the date it was last revised. The changed or
+        revised Agreement will be effective immediately after it is posted on
+        this Website. Your use of the Website following the posting of any such
+        changes or of a revised Agreement will constitute your acceptance of any
+        such changes or revisions. (URUVU) encourages you to review this
+        Agreement whenever you visit the Website to make sure that you
+        understand the terms and conditions governing use of the Website. If you
+        do not agree to this Agreement (including any referenced policies or
+        guidelines), please immediately terminate your use of the Website.
       </p>
       <p>
         <strong>Use of Website:</strong>
