@@ -1,24 +1,23 @@
-import axios from "axios";
-import React, { useEffect, useReducer, useState } from "react";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
-import Rating from "../components/Rating";
-import { getError } from "../utils";
-import Product from "../components/products";
-import { LinkContainer } from "react-router-bootstrap";
+import axios from 'axios';
+import React, { useEffect, useReducer, useState } from 'react';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { getError } from '../utils';
+import Product from '../components/products';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_REQUEST":
+    case 'FETCH_REQUEST':
       return { ...state, loading: true };
-    case "FETCH_SUCCESS":
+    case 'FETCH_SUCCESS':
       return {
         ...state,
         products: action.payload.products,
@@ -27,74 +26,28 @@ const reducer = (state, action) => {
         countProducts: action.payload.countProducts,
         loading: false,
       };
-    case "FETCH_FAIL":
+    case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
 };
 
-const prices = [
-  {
-    izina: "RWF100 to RWF500",
-    value: "100-500",
-  },
-  {
-    izina: "RWF500 to RWF1000",
-    value: "500-1000",
-  },
-  {
-    izina: "RWF1000 to RWF5000",
-    value: "1000-5000",
-  },
-  {
-    izina: "RWF5000 to RWF10000",
-    value: "5000-10000",
-  },
-  {
-    izina: "RWF10000 to RWF50000",
-    value: "10000-50000",
-  },
-  {
-    izina: "RWF50000 to RWF100000",
-    value: "50000-100000",
-  },
-];
-
-const ratings = [
-  {
-    izina: "4stars & up",
-    rating: 4,
-  },
-  {
-    izina: "3stars & up",
-    rating: 3,
-  },
-  {
-    izina: "2stars & up",
-    rating: 2,
-  },
-  {
-    izina: "1stars & up",
-    rating: 1,
-  },
-];
-
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // /search?category=Shirts
-  const category = sp.get("category") || "all";
-  const query = sp.get("query") || "all";
-  const price = sp.get("price") || "all";
-  const rating = sp.get("rating") || "all";
-  const order = sp.get("order") || "newest";
-  const page = sp.get("page") || 1;
+  const category = sp.get('category') || 'all';
+  const query = sp.get('query') || 'all';
+  const price = sp.get('price') || 'all';
+  const rating = sp.get('rating') || 'all';
+  const order = sp.get('order') || 'newest';
+  const page = sp.get('page') || 1;
 
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
-      error: "",
+      error: '',
     });
 
   useEffect(() => {
@@ -103,10 +56,10 @@ export default function SearchScreen() {
         const { data } = await axios.get(
           `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
-        dispatch({ type: "FETCH_SUCCESS", payload: data });
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({
-          type: "FETCH_FAIL",
+          type: 'FETCH_FAIL',
           payload: getError(error),
         });
       }
@@ -148,8 +101,8 @@ export default function SearchScreen() {
             <ul>
               <li>
                 <Link
-                  className={"all" === category ? "text-bold" : ""}
-                  to={getFilterUrl({ category: "all" })}
+                  className={'all' === category ? 'text-bold' : ''}
+                  to={getFilterUrl({ category: 'all' })}
                 >
                   Byose
                 </Link>
@@ -157,59 +110,13 @@ export default function SearchScreen() {
               {categories.map((c) => (
                 <li key={c}>
                   <Link
-                    className={c === category ? "text-bold" : ""}
+                    className={c === category ? 'text-bold' : ''}
                     to={getFilterUrl({ category: c })}
                   >
                     {c}
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Igiciro</h3>
-            <ul>
-              <li>
-                <Link
-                  className={"all" === price ? "text-bold" : ""}
-                  to={getFilterUrl({ price: "all" })}
-                >
-                  Byose
-                </Link>
-              </li>
-              {prices.map((p) => (
-                <li key={p.value}>
-                  <Link
-                    to={getFilterUrl({ price: p.value })}
-                    className={p.value === price ? "text-bold" : ""}
-                  >
-                    {p.izina}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3>Abarebye ko ari ibabo</h3>
-            <ul>
-              {ratings.map((r) => (
-                <li key={r.izina}>
-                  <Link
-                    to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
-                  >
-                    <Rating caption={" & up"} rating={r.rating}></Rating>
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  to={getFilterUrl({ rating: "all" })}
-                  className={rating === "all" ? "text-bold" : ""}
-                >
-                  <Rating caption={" & up"} rating={0}></Rating>
-                </Link>
-              </li>
             </ul>
           </div>
         </Col>
@@ -223,18 +130,18 @@ export default function SearchScreen() {
               <Row className="justify-content-between mb-3">
                 <Col md={6}>
                   <div>
-                    {countProducts === 0 ? "No" : countProducts} Results
-                    {query !== "all" && " : " + query}
-                    {category !== "all" && " : " + category}
-                    {price !== "all" && " : Price " + price}
-                    {rating !== "all" && " : Rating " + rating + " & up"}
-                    {query !== "all" ||
-                    category !== "all" ||
-                    rating !== "all" ||
-                    price !== "all" ? (
+                    {countProducts === 0 ? 'No' : countProducts} Results
+                    {query !== 'all' && ' : ' + query}
+                    {category !== 'all' && ' : ' + category}
+                    {price !== 'all' && ' : Price ' + price}
+                    {rating !== 'all' && ' : Rating ' + rating + ' & up'}
+                    {query !== 'all' ||
+                    category !== 'all' ||
+                    rating !== 'all' ||
+                    price !== 'all' ? (
                       <Button
                         variant="light"
-                        onClick={() => navigate("/search")}
+                        onClick={() => navigate('/search')}
                       >
                         <i className="fas fa-times-circle"></i>
                       </Button>
@@ -242,7 +149,7 @@ export default function SearchScreen() {
                   </div>
                 </Col>
                 <Col className="text-end">
-                  Toranya{" "}
+                  Toranya{' '}
                   <select
                     value={order}
                     onChange={(e) => {
@@ -273,7 +180,7 @@ export default function SearchScreen() {
                     to={getFilterUrl({ page: x + 1 })}
                   >
                     <Button
-                      className={Number(page) === x + 1 ? "text-bold" : ""}
+                      className={Number(page) === x + 1 ? 'text-bold' : ''}
                       variant="light"
                     >
                       {x + 1}

@@ -1,16 +1,15 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-import Rating from './Rating';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
-import { BiIdCard } from 'react-icons/bi';
 import Photo from './Icya.PNG';
 import { Store } from '../Store';
 import { Row } from 'react-bootstrap';
 
 function Product(props) {
   const { product } = props;
+  const navigate = useNavigate();
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
@@ -22,13 +21,14 @@ function Product(props) {
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock');
+      window.alert('Taken by owner');
       return;
     }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
     });
+    navigate('/cart');
   };
 
   return (
