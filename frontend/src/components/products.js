@@ -62,7 +62,6 @@ function Product(props) {
           <Card.Title>{product.category}</Card.Title>
         </Link>
 
-        <Card.Text>RWF{product.price}</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
             Nyirabyo yabonetse

@@ -11,7 +11,6 @@ const productSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: './no-image.png',
     },
 
     category: {
@@ -33,6 +32,7 @@ const productSchema = new mongoose.Schema(
     price: {
       type: Number,
       default: 2000,
+      required: true,
     },
 
     countInStock: {
@@ -59,9 +59,9 @@ productSchema.pre('save', async function (next) {
     return next();
   }
   const salt = await bcrypt.genSalt(6);
-  const hashedInfo = await bcrypt.hash(this.slug, this.image, salt);
+  const hashedInfo = await bcrypt.hash(this.slug, salt);
   this.slug = hashedInfo;
-  this.image = hashedInfo;
+
   next();
 });
 

@@ -37,10 +37,15 @@ export default function PlaceOrderScreen() {
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
   cart.itemsPrice = round2(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
+    cart.cartItems.reduce((a, c) => a + c.quantity * c.price * 0.6, 0)
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.18 * cart.itemsPrice);
+  cart.taxPrice = round2(
+    cart.cartItems.reduce((a, c) => a + 0.3 * c.price * c.quantity, 0)
+  );
+  cart.shippingPrice = round2(
+    cart.cartItems.reduce((a, c) => a + 0.1 * c.price * c.quantity, 0)
+  );
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
@@ -161,13 +166,13 @@ export default function PlaceOrderScreen() {
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <Row>
-                  <Col>Icyangombwa</Col>
+                  <Col>Igiciro cya serivisi</Col>
                   <Col>{cart.itemsPrice.toFixed(2)}RWF</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Ayo kukikuzanira</Col>
+                  <Col>ubwinyu bwa kohereza</Col>
                   <Col>{cart.shippingPrice.toFixed(2)}RWF</Col>
                 </Row>
               </ListGroup.Item>
@@ -180,7 +185,7 @@ export default function PlaceOrderScreen() {
               <ListGroup.Item>
                 <Row>
                   <Col>
-                    <strong> yose hamwe</strong>
+                    <strong> Ayo mwishyura</strong>
                   </Col>
                   <Col>
                     <strong>{cart.totalPrice.toFixed(2)}RWF</strong>

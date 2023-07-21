@@ -151,7 +151,7 @@ function ProductScreen() {
             </ListGroup.Item>
             <ListGroup.Item></ListGroup.Item>
             <ListGroup.Item>
-              Igiciro mwishyura : RWF{product.price}
+              Igiciro cya serivisi : RWF{product.price}
             </ListGroup.Item>
             {product && product.category !== 'Indangamuntu' && (
               <ListGroup.Item>
@@ -185,7 +185,7 @@ function ProductScreen() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Igiciro cyo kugitumiza:</Col>
+                    <Col>Igiciro cya serivisi:</Col>
                     <Col>Rwf{product.price}</Col>
                   </Row>
                 </ListGroup.Item>

@@ -66,7 +66,7 @@ export default function CartScreen() {
                       </Col>
                     )}
                     <Col md={3}></Col>
-                    <Col md={3}>Igiciro: {item.price} RWF</Col>
+                    <Col md={3}>Igiciro cya serivise: {item.price} RWF</Col>
 
                     <Col md={2}>
                       <Button

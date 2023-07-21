@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
-import { Store } from "../Store";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import { getError } from "../utils";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import React, { useContext, useEffect, useReducer } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { Store } from '../Store';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_REQUEST":
+    case 'FETCH_REQUEST':
       return { ...state, loading: true };
-    case "FETCH_SUCCESS":
+    case 'FETCH_SUCCESS':
       return {
         ...state,
         products: action.payload.products,
@@ -23,17 +23,17 @@ const reducer = (state, action) => {
         pages: action.payload.pages,
         loading: false,
       };
-    case "FETCH_FAIL":
+    case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
 
-    case "CREATE_REQUEST":
+    case 'CREATE_REQUEST':
       return { ...state, loadingCreate: true };
-    case "CREATE_SUCCESS":
+    case 'CREATE_SUCCESS':
       return {
         ...state,
         loadingCreate: false,
       };
-    case "CREATE_FAIL":
+    case 'CREATE_FAIL':
       return { ...state, loadingCreate: false };
 
     default:
@@ -55,13 +55,13 @@ export default function ProductListScreen() {
     dispatch,
   ] = useReducer(reducer, {
     loading: true,
-    error: "",
+    error: '',
   });
 
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
-  const page = sp.get("page") || 1;
+  const page = sp.get('page') || 1;
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
@@ -77,52 +77,52 @@ export default function ProductListScreen() {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
-        dispatch({ type: "FETCH_SUCCESS", payload: data });
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {}
     };
 
     if (successDelete) {
-      dispatch({ type: "DELETE_RESET" });
+      dispatch({ type: 'DELETE_RESET' });
     } else {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
 
   const createHandler = async () => {
-    if (window.confirm("Are you sure to create?")) {
+    if (window.confirm('Are you sure to create?')) {
       try {
-        dispatch({ type: "CREATE_REQUEST" });
+        dispatch({ type: 'CREATE_REQUEST' });
         const { data } = await axios.post(
-          "/api/products",
+          '/api/products',
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
-        toast.success("product created successfully");
-        dispatch({ type: "CREATE_SUCCESS" });
+        toast.success('product created successfully');
+        dispatch({ type: 'CREATE_SUCCESS' });
         navigate(`/admin/product/${data.product._id}`);
       } catch (err) {
         toast.error(getError(error));
         dispatch({
-          type: "CREATE_FAIL",
+          type: 'CREATE_FAIL',
         });
       }
     }
   };
 
   const deleteHandler = async (product) => {
-    if (window.confirm("Are you sure to delete?")) {
+    if (window.confirm('Are you sure to delete?')) {
       try {
         await axios.delete(`/api/products/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
-        toast.success("product deleted successfully");
-        dispatch({ type: "DELETE_SUCCESS" });
+        toast.success('product deleted successfully');
+        dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {
         toast.error(getError(error));
         dispatch({
-          type: "DELETE_FAIL",
+          type: 'DELETE_FAIL',
         });
       }
     }
@@ -155,11 +155,11 @@ export default function ProductListScreen() {
               <tr>
                 <th>ID</th>
                 <th>Izina</th>
-                <th>Categori</th>
+                <th>kategori</th>
 
                 <th>umubare wabyo</th>
 
-                <th>Igiciro cyo kugitumiza</th>
+                <th>Igiciro cya serivise</th>
               </tr>
             </thead>
             <tbody>
@@ -194,7 +194,7 @@ export default function ProductListScreen() {
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link
-                className={x + 1 === Number(page) ? "btn text-bold" : "btn"}
+                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
                 key={x + 1}
                 to={`/admin/products?page=${x + 1}`}
               >

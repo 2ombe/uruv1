@@ -66,7 +66,7 @@ export default function ProductEditScreen() {
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(2000);
   const [image, setImage] = useState('');
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState('');
@@ -124,7 +124,7 @@ export default function ProductEditScreen() {
         type: 'UPDATE_SUCCESS',
       });
       toast.success('Product updated successfully');
-      //navigate("/admin/products");
+      navigate('/admin/product');
     } catch (err) {
       toast.error(getError(err));
       dispatch({ type: 'UPDATE_FAIL' });
@@ -183,9 +183,18 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
 
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Igiciro cya servise</Form.Label>
+            <Form.Control
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+              disabled
+            />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="image">
             <Form.Group className="mb-3" controlId="imageFile">
-              <Form.Label>Upload File</Form.Label>
+              <Form.Label>Shyiraho ifoto</Form.Label>
               <Form.Control type="file" onChange={uploadFileHandler} />
               {loadingUpload && <LoadingBox></LoadingBox>}
             </Form.Group>
