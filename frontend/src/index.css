@@ -23,6 +23,9 @@ main {
   flex-wrap: wrap;
   justify-content: center;
 }
+.img-large {
+  width: 150%;
+}
 
 .product {
   border: 1px #404040 solid;

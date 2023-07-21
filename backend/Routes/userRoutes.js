@@ -1,12 +1,12 @@
-import express from "express";
-import expressAsyncHandler from "express-async-handler";
-import User from "../models/userModal.js";
-import bcrypt from "bcryptjs";
-import { generateToken, isAdmin, isAuth } from "../utils.js";
+import express from 'express';
+import expressAsyncHandler from 'express-async-handler';
+import User from '../models/userModal.js';
+import bcrypt from 'bcryptjs';
+import { generateToken, isAdmin, isAuth } from '../utils.js';
 const userRouter = express.Router();
 
 userRouter.get(
-  "/",
+  '/',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
@@ -15,8 +15,19 @@ userRouter.get(
   })
 );
 
+userRouter.get(
+  '/mine',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const users = await User.find({ lastEditedBy: req.user._id });
+
+    res.send(users);
+  })
+);
+
 userRouter.post(
-  "/signin",
+  '/signin',
   expressAsyncHandler(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
@@ -26,17 +37,18 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
+          suAdmin: user.suAdmin,
           token: generateToken(user),
         });
         return;
       }
     }
-    res.status(401).send({ message: "Invalid email or password" });
+    res.status(401).send({ message: 'Invalid email or password' });
   })
 );
 
 userRouter.post(
-  "/signup",
+  '/signup',
   expressAsyncHandler(async (req, res) => {
     const newUser = new User({
       name: req.body.name,
@@ -49,13 +61,14 @@ userRouter.post(
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      suAdmin: user.suAdmin,
       token: generateToken(user),
     });
   })
 );
 
 userRouter.get(
-  "/:id",
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
@@ -63,51 +76,58 @@ userRouter.get(
     if (user) {
       res.send(user);
     } else {
-      res.status(404).send({ message: "User Not Found" });
+      res.status(404).send({ message: 'User Not Found' });
     }
   })
 );
 
 userRouter.put(
-  "/:id",
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.isAdmin = Boolean(req.body.isAdmin);
+      user.suAdmin = Boolean(req.body.suAdmin);
+
+      // Set the ID of the admin who edited the user
+      user.lastEditedBy = req.user._id;
+
       const updatedUser = await user.save();
-      res.send({ message: "User Updated", user: updatedUser });
+      res.send({ message: 'User Updated', user: updatedUser });
     } else {
-      res.status(404).send({ message: "User Not Found" });
+      res.status(404).send({ message: 'User Not Found' });
     }
   })
 );
 
 //delete user
 userRouter.delete(
-  "/:id",
+  '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
-      if (user.email === "admin@example.com") {
-        res.status(400).send({ message: "Can Not Delete Admin User" });
+      if (user.email === 'admin@example.com') {
+        res.status(400).send({ message: 'Can Not Delete Admin User' });
         return;
       }
       await user.remove();
-      res.send({ message: "User Deleted" });
+      res.send({ message: 'User Deleted' });
     } else {
-      res.status(404).send({ message: "User Not Found" });
+      res.status(404).send({ message: 'User Not Found' });
     }
   })
 );
 
 userRouter.put(
-  "/profile",
+  '/profile',
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
@@ -127,7 +147,7 @@ userRouter.put(
         token: generateToken(updatedUser),
       });
     } else {
-      res.status(404).send({ message: "User not found" });
+      res.status(404).send({ message: 'User not found' });
     }
   })
 );

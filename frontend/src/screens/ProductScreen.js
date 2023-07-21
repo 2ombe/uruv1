@@ -141,16 +141,11 @@ function ProductScreen() {
               </Helmet>
               <h1>{product.name}</h1>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <Rating
-                rating={product.rating}
-                numReviews={product.numReviews}
-              ></Rating>
-            </ListGroup.Item>
+            <ListGroup.Item></ListGroup.Item>
             <ListGroup.Item>
               Igiciro mwishyura : RWF{product.price}
             </ListGroup.Item>
-            {product && product.category !== 'Indangamunt' && (
+            {product && product.category !== 'Indangamuntu' && (
               <ListGroup.Item>
                 <Row xs={1} md={2} className="g-2">
                   {[product.image].map((x) => (

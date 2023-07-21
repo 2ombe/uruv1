@@ -1,25 +1,26 @@
-import React, { useContext, useEffect, useReducer } from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import ListGroup from "react-bootstrap/ListGroup";
-import { Helmet } from "react-helmet-async";
-import Card from "react-bootstrap/Card";
-import CheckoutSteps from "../components/Checksteps";
-import { Link, useNavigate } from "react-router-dom";
-import { Store } from "../Store";
-import Button from "react-bootstrap/esm/Button";
-import { toast } from "react-toastify";
-import { getError } from "../utils";
-import Axios from "axios";
-import LoadingBox from "../components/LoadingBox";
+import React, { useContext, useEffect, useReducer } from 'react';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Helmet } from 'react-helmet-async';
+import Card from 'react-bootstrap/Card';
+import CheckoutSteps from '../components/Checksteps';
+import { Link, useNavigate } from 'react-router-dom';
+import { Store } from '../Store';
+import Button from 'react-bootstrap/esm/Button';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
+import Axios from 'axios';
+import LoadingBox from '../components/LoadingBox';
+import Photo from '../components/Icya.PNG';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "CREATE_REQUEST":
+    case 'CREATE_REQUEST':
       return { ...state, loading: true };
-    case "CREATE_SUCCESS":
+    case 'CREATE_SUCCESS':
       return { ...state, loading: false };
-    case "CREATE_FAIL":
+    case 'CREATE_FAIL':
       return { ...state, loading: false };
     default:
       return state;
@@ -44,9 +45,9 @@ export default function PlaceOrderScreen() {
 
   const placeOrderHandler = async () => {
     try {
-      dispatch({ type: "CREATE_REQUEST" });
+      dispatch({ type: 'CREATE_REQUEST' });
       const { data } = await Axios.post(
-        "/api/orders",
+        '/api/orders',
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -63,18 +64,18 @@ export default function PlaceOrderScreen() {
           },
         }
       );
-      ctxDispatch({ type: "CART_CLEAR" });
-      dispatch({ type: "CREATE_SUCCESS" });
-      localStorage.removeItem("cartItems");
+      ctxDispatch({ type: 'CART_CLEAR' });
+      dispatch({ type: 'CREATE_SUCCESS' });
+      localStorage.removeItem('cartItems');
       navigate(`/order/${data.order._id}`);
     } catch (err) {
-      dispatch({ type: "CREATE_FAIL" });
+      dispatch({ type: 'CREATE_FAIL' });
       toast.error(getError(err));
     }
   };
   useEffect(() => {
     if (!cart.paymentMethod) {
-      navigate("/payment");
+      navigate('/payment');
     }
   }, [cart, navigate]);
   return (
@@ -119,14 +120,25 @@ export default function PlaceOrderScreen() {
                 {cart.cartItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
-                      <Col md={6}>
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded img-thumbnail"
-                        ></img>{" "}
-                        <Link to={`/product/${item.slug}`}>{item.name}</Link>
-                      </Col>
+                      {item && item.category === 'Indangamuntu' ? (
+                        <Col md={6}>
+                          <img
+                            src={Photo}
+                            alt={item.name}
+                            className="img-fluid rounded img-thumbnail"
+                          ></img>{' '}
+                          <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                        </Col>
+                      ) : (
+                        <Col md={6}>
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="img-fluid rounded img-thumbnail"
+                          ></img>{' '}
+                          <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                        </Col>
+                      )}
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>

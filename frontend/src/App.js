@@ -63,7 +63,7 @@ function App() {
       setShowTermsModel(true);
     }
   }, [acceptedTerms]);
-
+  console.log(userInfo);
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' });
     localStorage.removeItem('userInfo');
@@ -162,7 +162,7 @@ function App() {
                       Injira
                     </Link>
                   )}
-                  {userInfo && userInfo.isAdmin && (
+                  {userInfo && (userInfo.isAdmin || userInfo.suAdmin) && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Amakuru</NavDropdown.Item>

@@ -6,11 +6,11 @@ import Momo from "../models/momoModel.js";
 
 const headers = {
   // Request headers
-  Authorization: "",
-  "X-Target-Environment": "",
-  "X-Callback-Url": "",
+  Authorization: process.env.AUTHORIZATION,
+  "X-Target-Environment": process.env.TARGET_ENVIRONMENT,
+  "X-Callback-Url": process.env.CALLBACK_URL,
   "Content-Type": "application/x-www-form-urlencoded",
-  "Ocp-Apim-Subscription-Key": "{subscription key}",
+  "Ocp-Apim-Subscription-Key": process.env.SUBSCRIPTION_KEY,
 };
 
 paymentRouter.post(
@@ -22,14 +22,11 @@ paymentRouter.post(
         req.body;
 
       const newPayment = new Momo({
-        amount: "Enter amount",
-        customerName: "Enter name",
-        externalId: "client number",
-        externalId: {
-          partyIdType: "MSISDN",
-          partyId: "250780486359",
-        },
-        currency: "RWF",
+        amount,
+        customerName,
+        customerEmail,
+        currency,
+        phone_number: customerPhone,
       });
 
       const data = await newPayment.save();
