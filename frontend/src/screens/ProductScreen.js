@@ -8,7 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import Rating from '../components/Rating';
+import Photo from '../components/Icya.PNG';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -124,7 +124,15 @@ function ProductScreen() {
   ) : (
     <div>
       <Row>
-        {product && product.category !== 'Indangamuntu' && (
+        {product &&
+        (product.category === 'Indangamuntu' ||
+          product.category === 'Uruhushya rwo gutwara' ||
+          product.category === 'Passport' ||
+          product.category === "Icyangombwa cy'ubutakaka") ? (
+          <Col md={6}>
+            <img className="img-large" src={Photo} alt={product.name}></img>
+          </Col>
+        ) : (
           <Col md={6}>
             <img
               className="img-large"

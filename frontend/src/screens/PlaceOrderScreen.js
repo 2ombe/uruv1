@@ -120,7 +120,11 @@ export default function PlaceOrderScreen() {
                 {cart.cartItems.map((item) => (
                   <ListGroup.Item key={item._id}>
                     <Row className="align-items-center">
-                      {item && item.category === 'Indangamuntu' ? (
+                      {item &&
+                      (item.category === 'Indangamuntu' ||
+                        item.category === 'Uruhushya rwo gutwara' ||
+                        item.category === 'Passport' ||
+                        item.category === "Icyangombwa cy'ubutakaka") ? (
                         <Col md={6}>
                           <img
                             src={Photo}

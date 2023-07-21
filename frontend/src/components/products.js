@@ -35,7 +35,11 @@ function Product(props) {
     <Card>
       <Card.Body>
         <Row>
-          {product && product.category === 'Indangamuntu' ? (
+          {product &&
+          (product.category === 'Indangamuntu' ||
+            product.category === 'Uruhushya rwo gutwara' ||
+            product.category === 'Passport' ||
+            product.category === "Icyangombwa cy'ubutakaka") ? (
             <Link to={`/product/${product.slug}`}>
               <img
                 className="img-large"
