@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const productSchema = new mongoose.Schema(
   {
@@ -11,17 +11,28 @@ const productSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: "./no-image.png",
+      default: './no-image.png',
     },
 
     category: {
       type: String,
+      enum: [
+        'Indangamuntu',
+        'Uruhushya rwo gutwara',
+        'Passport',
+        'Infunguruzo',
+        'Ibikapu',
+        'Imizigo',
+        "Icyangombwa cy'ubutakaka",
+        'Ibindi',
+      ],
     },
     description: {
       type: String,
     },
     price: {
       type: Number,
+      default: 2000,
     },
 
     countInStock: {
@@ -34,7 +45,7 @@ const productSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
   },
@@ -43,8 +54,8 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-productSchema.pre("save", async function (next) {
-  if (this.isModified("image slag")) {
+productSchema.pre('save', async function (next) {
+  if (this.isModified('image slag')) {
     return next();
   }
   const salt = await bcrypt.genSalt(6);
@@ -54,5 +65,5 @@ productSchema.pre("save", async function (next) {
   next();
 });
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model('Product', productSchema);
 export default Product;
